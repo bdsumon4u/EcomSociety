@@ -11,8 +11,10 @@ use App\Http\Controllers\Controller;
 use App\Lib\OTPManager;
 use App\Models\Installment;
 use App\Models\OtpVerification;
+use App\Models\User;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DpsController extends Controller {
     public function list() {
@@ -49,47 +51,63 @@ class DpsController extends Controller {
         OTPManager::checkVerificationData($verification, DpsPlan::class);
         $plan         = $verification->verifiable;
         $amount       = $plan->per_installment + 0;
-        $user         = auth()->user();
+        $user         = (fn (): User => auth()->user())();
 
-        if ($user->balance < $amount) {
-            $notify[] = ['error', 'You must have at least one installment amount in your account'];
+        DB::beginTransaction();
+        try {
+            $percentCharge = $plan->per_installment * $plan->percent_charge / 100;
+            $charge        = $plan->fixed_charge + $percentCharge;
+
+            $dps                         = new Dps();
+            $dps->user_id                = $user->id;
+            $dps->plan_id                = $plan->id;
+            $dps->dps_number             = getTrx();
+            $dps->interest_rate          = $plan->interest_rate;
+            $dps->per_installment        = $plan->per_installment;
+            $dps->total_installment      = $plan->total_installment;
+            $dps->given_installment      = 1;
+            $dps->installment_interval   = $plan->installment_interval;
+            $dps->delay_value            = $plan->delay_value;
+            $dps->charge_per_installment = $charge;
+            $dps->save();
+
+            // $user->balance -= $amount;
+            // $user->save();
+
+            Installment::saveInstallments($dps, $plan->created_at);
+            
+            $nextInstallments = $dps->nextInstallment()->where('installment_date', '<=', now()->toDateTimeString())->get();
+
+            $dps->given_installment = $nextInstallments->count();
+            if ($user->balance < $amount * $dps->given_installment) {
+                throw ValidationException::withMessages(['balance' => 'Insufficient balance']);
+            }
+            $dps->save();
+
+            $user->balance -= $amount * $dps->given_installment;
+            $user->save();
+
+            foreach ($nextInstallments as $nextInstallment) {
+                $nextInstallment->given_at = now();
+                $nextInstallment->save();
+
+                $transaction               = new Transaction();
+                $transaction->user_id      = $user->id;
+                $transaction->amount       = $amount;
+                $transaction->post_balance = $user->balance;
+                $transaction->charge       = 0;
+                $transaction->trx_type     = '-';
+                $transaction->details      = 'DPS installment given';
+                $transaction->trx          = $dps->dps_number;
+                $transaction->remark       = "dps_installment";
+                $transaction->save();
+            }
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            $notify[] = ['error', 'You must have at least '.$dps->given_installment.' installment amount in your account'];
             return redirect()->route('user.dps.plans')->withNotify($notify);
         }
-
-        $percentCharge = $plan->per_installment * $plan->percent_charge / 100;
-        $charge        = $plan->fixed_charge + $percentCharge;
-
-        $dps                         = new Dps();
-        $dps->user_id                = $user->id;
-        $dps->plan_id                = $plan->id;
-        $dps->dps_number             = getTrx();
-        $dps->interest_rate          = $plan->interest_rate;
-        $dps->per_installment        = $plan->per_installment;
-        $dps->total_installment      = $plan->total_installment;
-        $dps->given_installment      = 1;
-        $dps->installment_interval   = $plan->installment_interval;
-        $dps->delay_value            = $plan->delay_value;
-        $dps->charge_per_installment = $charge;
-        $dps->save();
-
-        $user->balance -= $amount;
-        $user->save();
-
-        Installment::saveInstallments($dps);
-        $nextInstallment = $dps->nextInstallment()->first();
-        $nextInstallment->given_at = now();
-        $nextInstallment->save();
-
-        $transaction               = new Transaction();
-        $transaction->user_id      = $user->id;
-        $transaction->amount       = $amount;
-        $transaction->post_balance = $user->balance;
-        $transaction->charge       = 0;
-        $transaction->trx_type     = '-';
-        $transaction->details      = 'DPS installment given';
-        $transaction->trx          = $dps->dps_number;
-        $transaction->remark       = "dps_installment";
-        $transaction->save();
+        DB::commit();
 
         $adminNotification            = new AdminNotification();
         $adminNotification->user_id   = $user->id;
@@ -103,6 +121,12 @@ class DpsController extends Controller {
         $shortCodes['next_installment_date'] = now()->addDays($dps->installment_interval);
 
         notify($user, 'DPS_OPENED', $shortCodes);
+
+        if ($dps->given_installment == $dps->total_installment) {
+            $dps->status = Status::DPS_MATURED;
+            notify($user, 'DPS_MATURED', $shortCodes);
+            $dps->save();
+        }
 
         return redirect()->route('user.dps.list');
     }

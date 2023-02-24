@@ -39,7 +39,7 @@
                                                 <small class="text--base d-block">@lang('Given') : {{ $dps->given_installment }}</small>
                                             </td>
 
-                                            <td>{{ showDateTime($dps->nextInstallment->installment_date, 'd M, Y') }}</td>
+                                            <td>{{ showDateTime($dps->nextInstallment->installment_date ?? today(), 'd M, Y') }}</td>
 
                                             <td>
                                                 {{ $general->cur_sym }}{{ showAmount($dps->depositedAmount() + $dps->profitAmount()) }}
