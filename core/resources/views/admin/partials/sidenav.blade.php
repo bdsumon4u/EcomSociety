@@ -250,7 +250,7 @@
                     </div>
                 </li>
 
-                <li class="sidebar-menu-item sidebar-dropdown">
+                {{-- <li class="sidebar-menu-item sidebar-dropdown">
                     <a href="javascript:void(0)" class="{{ menuActive('admin.transfer*', 3) }}">
                         <i class="menu-icon las la-random"></i>
                         <span class="menu-title">@lang('Money Transfers') </span>
@@ -309,16 +309,16 @@
                             </li>
                         </ul>
                     </div>
-                </li>
+                </li> --}}
 
-                <li class="sidebar-menu-item {{ menuActive('admin.bank.*') }}">
+                {{-- <li class="sidebar-menu-item {{ menuActive('admin.bank.*') }}">
                     <a href="{{ route('admin.bank.index') }}" class="nav-link">
                         <i class="menu-icon la la-bank"></i>
                         <span class="menu-title">@lang('Other Banks')</span>
                     </a>
-                </li>
+                </li> --}}
 
-                <li class="sidebar-menu-item sidebar-dropdown">
+                {{-- <li class="sidebar-menu-item sidebar-dropdown">
                     <a href="javascript:void(0)" class="{{ menuActive('admin.wire.transfer*', 3) }}">
                         <i class="menu-icon las la-comments-dollar"></i>
                         <span class="menu-title">@lang('Wire Transfer') </span>
@@ -339,7 +339,7 @@
                             </li>
                         </ul>
                     </div>
-                </li>
+                </li> --}}
 
                 <li class="sidebar-menu-item sidebar-dropdown">
                     <a href="javascript:void(0)" class="{{ menuActive('admin.branch*', 3) }}">
@@ -372,12 +372,12 @@
                     </a>
                     <div class="sidebar-submenu {{ menuActive('admin.plans*', 2) }} ">
                         <ul>
-                            <li class="sidebar-menu-item {{ menuActive('admin.plans.fdr*') }}">
+                            {{-- <li class="sidebar-menu-item {{ menuActive('admin.plans.fdr*') }}">
                                 <a href="{{ route('admin.plans.fdr.index') }}" class="nav-link">
                                     <i class="menu-icon las la-dot-circle"></i>
                                     <span class="menu-title">@lang('FDR Plans')</span>
                                 </a>
-                            </li>
+                            </li> --}}
 
                             <li class="sidebar-menu-item {{ menuActive('admin.plans.dps*') }}">
                                 <a href="{{ route('admin.plans.dps.index') }}" class="nav-link">
@@ -386,17 +386,17 @@
                                 </a>
                             </li>
 
-                            <li class="sidebar-menu-item {{ menuActive('admin.plans.loan*') }}">
+                            {{-- <li class="sidebar-menu-item {{ menuActive('admin.plans.loan*') }}">
                                 <a href="{{ route('admin.plans.loan.index') }}" class="nav-link">
                                     <i class="menu-icon las la-dot-circle"></i>
                                     <span class="menu-title">@lang('Loan Plans')</span>
                                 </a>
-                            </li>
+                            </li> --}}
                         </ul>
                     </div>
                 </li>
 
-                <li class="sidebar-menu-item sidebar-dropdown">
+                {{-- <li class="sidebar-menu-item sidebar-dropdown">
                     <a href="javascript:void(0)" class="{{ menuActive('admin.fdr*', 3) }}">
                         <i class="menu-icon las la-money-bill"></i>
                         <span class="menu-title">@lang('FDR') </span>
@@ -444,7 +444,7 @@
 
                         </ul>
                     </div>
-                </li>
+                </li> --}}
 
                 <li class="sidebar-menu-item sidebar-dropdown">
                     <a href="javascript:void(0)" class="{{ menuActive('admin.dps*', 3) }}">
@@ -499,7 +499,7 @@
                     </div>
                 </li>
 
-                <li class="sidebar-menu-item sidebar-dropdown">
+                {{-- <li class="sidebar-menu-item sidebar-dropdown">
                     <a href="javascript:void(0)" class="{{ menuActive('admin.loan*', 3) }}">
                         <i class="menu-icon las la-hand-holding-usd"></i>
                         <span class="menu-title">@lang('Loans')</span>
@@ -562,7 +562,7 @@
                             </li>
                         </ul>
                     </div>
-                </li>
+                </li> --}}
 
                 <li class="sidebar-menu-item sidebar-dropdown">
                     <a href="javascript:void(0)" class="{{ menuActive('admin.gateway*', 3) }}">
@@ -770,12 +770,12 @@
 
                 <li class="sidebar__menu-header">@lang('Frontend Manager')</li>
 
-                <li class="sidebar-menu-item {{ menuActive('admin.frontend.templates') }}">
+                {{-- <li class="sidebar-menu-item {{ menuActive('admin.frontend.templates') }}">
                     <a href="{{ route('admin.frontend.templates') }}" class="nav-link ">
                         <i class="menu-icon la la-puzzle-piece"></i>
                         <span class="menu-title">@lang('Manage Templates')</span>
                     </a>
-                </li>
+                </li> --}}
 
                 <li class="sidebar-menu-item {{ menuActive('admin.frontend.manage.*') }}">
                     <a href="{{ route('admin.frontend.manage.pages') }}" class="nav-link ">
@@ -824,7 +824,7 @@
                     </a>
                 </li>
 
-                <li class="sidebar-menu-item sidebar-dropdown">
+                {{-- <li class="sidebar-menu-item sidebar-dropdown">
                     <a href="javascript:void(0)" class="{{ menuActive('admin.system*', 3) }}">
                         <i class="menu-icon la la-server"></i>
                         <span class="menu-title">@lang('System')</span>
@@ -851,14 +851,14 @@
                             </li>
                         </ul>
                     </div>
-                </li>
+                </li> --}}
 
-                <li class="sidebar-menu-item {{ menuActive('admin.setting.custom.css') }}">
+                {{-- <li class="sidebar-menu-item {{ menuActive('admin.setting.custom.css') }}">
                     <a href="{{ route('admin.setting.custom.css') }}" class="nav-link">
                         <i class="menu-icon lab la-css3-alt"></i>
                         <span class="menu-title">@lang('Custom CSS')</span>
                     </a>
-                </li>
+                </li> --}}
 
                 <li class="sidebar-menu-item  {{ menuActive('admin.request.report') }}">
                     <a href="{{ route('admin.request.report') }}" class="nav-link" data-default-url="{{ route('admin.request.report') }}">
@@ -867,10 +867,10 @@
                     </a>
                 </li>
             </ul>
-            <div class="text-center mb-3 text-uppercase">
+            {{-- <div class="text-center mb-3 text-uppercase">
                 <span class="text--primary">{{ __(systemDetails()['name']) }}</span>
                 <span class="text--success">@lang('V'){{ systemDetails()['version'] }} </span>
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>

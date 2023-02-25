@@ -7,7 +7,7 @@
                     @csrf
                     <div class="card-body">
                         <ul class="list-group">
-                            <li class="list-group-item d-flex flex-wrap flex-sm-nowrap gap-2 justify-content-between align-items-center">
+                            {{-- <li class="list-group-item d-flex flex-wrap flex-sm-nowrap gap-2 justify-content-between align-items-center">
                                 <div>
                                     <p class="fw-bold mb-0">@lang('Online User Registration')</p>
                                     <p class="mb-0">
@@ -17,7 +17,7 @@
                                 <div class="form-group">
                                     <input type="checkbox" data-width="100%" data-size="large" data-onstyle="-success" data-offstyle="-danger" data-bs-toggle="toggle" data-height="35" data-on="@lang('Enable')" data-off="@lang('Disable')" name="registration" @if ($general->registration) checked @endif>
                                 </div>
-                            </li>
+                            </li> --}}
 
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 <div>
@@ -159,7 +159,7 @@
                                 </div>
                             </li>
 
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                            {{-- <li class="list-group-item d-flex justify-content-between align-items-center">
                                 <div>
                                     <p class="form-control-label fw-bold">@lang('FDR')</p>
                                     <p class="mb-0">
@@ -169,7 +169,7 @@
                                 <div class="form-group">
                                     <input type="checkbox" data-width="100%" data-size="large" data-onstyle="-success" data-offstyle="-danger" data-bs-toggle="toggle" data-height="35" data-on="@lang('Enable')" data-off="@lang('Disable')" name="module[fdr]" @if ($modules && $modules->fdr) checked @endif>
                                 </div>
-                            </li>
+                            </li> --}}
 
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 <div>
@@ -183,7 +183,7 @@
                                 </div>
                             </li>
 
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                            {{-- <li class="list-group-item d-flex justify-content-between align-items-center">
                                 <div>
                                     <p class="form-control-label fw-bold">@lang('Loan')</p>
                                     <p class="mb-0">
@@ -193,9 +193,9 @@
                                 <div class="form-group">
                                     <input type="checkbox" data-width="100%" data-size="large" data-onstyle="-success" data-offstyle="-danger" data-bs-toggle="toggle" data-height="35" data-on="@lang('Enable')" data-off="@lang('Disable')" name="module[loan]" @if ($modules && $modules->loan) checked @endif>
                                 </div>
-                            </li>
+                            </li> --}}
 
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                            {{-- <li class="list-group-item d-flex justify-content-between align-items-center">
                                 <div>
                                     <p class="form-control-label fw-bold">@lang('Own Bank Transfer')</p>
                                     <p class="mb-0">
@@ -206,9 +206,9 @@
                                 <div class="form-group">
                                     <input type="checkbox" data-width="100%" data-size="large" data-onstyle="-success" data-offstyle="-danger" data-bs-toggle="toggle" data-height="35" data-on="@lang('Enable')" data-off="@lang('Disable')" name="module[own_bank]" @if ($modules && $modules->own_bank) checked @endif>
                                 </div>
-                            </li>
+                            </li> --}}
 
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                            {{-- <li class="list-group-item d-flex justify-content-between align-items-center">
                                 <div>
                                     <p class="form-control-label fw-bold">@lang('Other Bank Transfer')</p>
                                     <p class="mb-0">@lang("Here you can enable/disable the Other Bank Transfer Module. After disabling this module user can't transfer money to other local banks").
@@ -218,9 +218,9 @@
                                 <div class="form-group">
                                     <input type="checkbox" data-width="100%" data-size="large" data-onstyle="-success" data-offstyle="-danger" data-bs-toggle="toggle" data-height="35" data-on="@lang('Enable')" data-off="@lang('Disable')" name="module[other_bank]" @if ($modules && $modules->other_bank) checked @endif>
                                 </div>
-                            </li>
+                            </li> --}}
 
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                            {{-- <li class="list-group-item d-flex justify-content-between align-items-center">
                                 <div>
                                     <p class="form-control-label fw-bold">@lang('Wire Transfer')</p>
                                     <p class="mb-0">
@@ -231,7 +231,7 @@
                                 <div class="form-group">
                                     <input type="checkbox" data-width="100%" data-size="large" data-onstyle="-success" data-offstyle="-danger" data-bs-toggle="toggle" data-height="35" data-on="@lang('Enable')" data-off="@lang('Disable')" name="module[wire_transfer]" @if ($modules && @$modules->wire_transfer) checked @endif>
                                 </div>
-                            </li>
+                            </li> --}}
 
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 <div>
@@ -254,7 +254,7 @@
                                 </div>
                             </li>
 
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                            {{-- <li class="list-group-item d-flex justify-content-between align-items-center">
                                 <div>
                                     <p class="form-control-label fw-bold">@lang('Referral System')</p>
                                     <p class="mb-0">
@@ -265,7 +265,7 @@
                                 <div class="form-group">
                                     <input type="checkbox" data-width="100%" data-size="large" data-onstyle="-success" data-offstyle="-danger" data-bs-toggle="toggle" data-height="35" data-on="@lang('Enable')" data-off="@lang('Disable')" name="module[referral_system]" @if ($modules && @$modules->referral_system) checked @endif>
                                 </div>
-                            </li>
+                            </li> --}}
                         </ul>
                     </div>
                     <div class="card-footer">
