@@ -171,6 +171,30 @@
                 </li>
 
                 <li class="sidebar-menu-item sidebar-dropdown">
+                    <a href="javascript:void(0)" class="{{ menuActive('admin.expenses*', 3) }}">
+                        <i class="menu-icon las la-file-invoice-dollar"></i>
+                        <span class="menu-title">@lang('Expenses')</span>
+                    </a>
+                    <div class="sidebar-submenu {{ menuActive('admin.expenses*', 2) }} ">
+                        <ul>
+                            <li class="sidebar-menu-item {{ menuActive('admin.expenses.index') }} ">
+                                <a href="{{ route('admin.expenses.index') }}" class="nav-link">
+                                    <i class="menu-icon las la-dot-circle"></i>
+                                    <span class="menu-title">@lang('All Expenses')</span>
+                                </a>
+                            </li>
+
+                            <li class="sidebar-menu-item {{ menuActive('admin.expenses.create') }} ">
+                                <a href="{{ route('admin.expenses.create') }}" class="nav-link">
+                                    <i class="menu-icon las la-dot-circle"></i>
+                                    <span class="menu-title">@lang('Add New')</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="sidebar-menu-item sidebar-dropdown">
                     <a href="javascript:void(0)" class="{{ menuActive('admin.withdraw*', 3) }}">
                         <i class="menu-icon la la-hand-holding-usd"></i>
                         <span class="menu-title">@lang('Withdrawals') </span>
