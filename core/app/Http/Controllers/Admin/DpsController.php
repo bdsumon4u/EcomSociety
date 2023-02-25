@@ -48,7 +48,7 @@ class DpsController extends Controller {
         }
 
         $pageTitle = $this->pageTitle;
-        $data      = $query->searchAble(['dps_number'])->with('user', 'plan')->with('nextInstallment')->withCount('dueInstallments')->paginate(getPaginate());
+        $data      = $query->searchAble(['dps_number', 'user:username', 'plan:name'])->with('user', 'plan')->with('nextInstallment')->withCount('dueInstallments')->paginate(getPaginate());
 
         return view('admin.dps.index', compact('pageTitle', 'data'));
     }
