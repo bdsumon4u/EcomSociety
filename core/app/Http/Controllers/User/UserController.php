@@ -9,6 +9,7 @@ use App\Lib\GoogleAuthenticator;
 use App\Models\BalanceTransfer;
 use App\Models\Deposit;
 use App\Models\Dps;
+use App\Models\Expense;
 use App\Models\Fdr;
 use App\Models\Form;
 use App\Models\Loan;
@@ -24,6 +25,11 @@ class UserController extends Controller {
     public function home() {
         $pageTitle = 'Dashboard';
         $user      = auth()->user();
+
+        $widget['app_total_deposit'] = Deposit::successful()->sum('final_amo');
+        $widget['app_total_expense'] = Expense::sum('amount');
+        $widget['app_total_withdraw'] = Withdrawal::approved()->sum('after_charge');
+        $widget['app_current_balance'] = $widget['app_total_deposit'] - $widget['app_total_withdraw'] - $widget['app_total_expense'];
 
         $widget['total_deposit']  = Deposit::successful()->where('user_id', $user->id)->sum('amount');
         $widget['total_fdr']      = Fdr::where('user_id', $user->id)->count();

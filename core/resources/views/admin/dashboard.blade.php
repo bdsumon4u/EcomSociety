@@ -35,7 +35,23 @@
 
     <div class="row gy-4">
         <div class="col-xxl-3 col-sm-6">
-            <x-widget style="2" bg="white" color="primary" icon="la la-users" title="Total Users" value="{{ $widget['total_users'] }}" link="{{ route('admin.users.all') }}" icon_style="solid" overlay_icon=0 />
+            <x-widget style="2" bg="white" color="primary" icon="las la-file-invoice-dollar" title="Total Deposits" value="{{ showAmount($widget['total_deposits']) }}" link="{{ route('admin.deposit.list') }}" icon_style="solid" overlay_icon=0 />
+        </div>
+
+        <div class="col-xxl-3 col-sm-6">
+            <x-widget style="2" bg="white" color="danger" icon="las la-file-invoice-dollar" title="Total Expenses" value="{{ showAmount($widget['total_expenses']) }}" link="{{ route('admin.expenses.index') }}" icon_style="solid" overlay_icon=0 />
+        </div>
+
+        <div class="col-xxl-3 col-sm-6">
+            <x-widget style="2" bg="white" color="danger" icon="las la-file-invoice-dollar" title="Total Withrawals" value="{{ showAmount($widget['total_withdrawals']) }}" link="{{ route('admin.withdraw.log') }}" icon_style="solid" overlay_icon=0 />
+        </div>
+
+        <div class="col-xxl-3 col-sm-6">
+            <x-widget style="2" bg="white" color="success" icon="las la-file-invoice-dollar" title="Total Balance" value="{{ showAmount($widget['total_balance']) }}" icon_style="solid" overlay_icon=0 />
+        </div>
+
+        <div class="col-xxl-3 col-sm-6">
+            <x-widget style="2" bg="white" color="success" icon="la la-users" title="Total Users" value="{{ $widget['total_users'] }}" link="{{ route('admin.users.all') }}" icon_style="solid" overlay_icon=0 />
         </div>
 
         <div class="col-xxl-3 col-sm-6">

@@ -20,6 +20,38 @@ $kyc = getContent('kyc_content.content', true);
                     </div>
                 @endif
             </div>
+            <div class="col-lg-12">
+                <h4 class="mb-3 text-center">@lang($general->site_name.' Overview')</h4>
+                <div class="row gy-3">
+                    <div class="col-lg-3">
+                        <div class="card-widget section--bg2 text-center bg_img" style="background-image: url(' {{ asset($activeTemplateTrue . 'images/elements/card-bg.png') }} ');">
+                            <span class="caption text-white mb-3">@lang('Total Deposit')</span>
+                            <h3 class="d-number text-white">{{ showAmount($widget['app_total_deposit']) }}</h3>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="card-widget section--bg2 text-center bg_img" style="background-image: url(' {{ asset($activeTemplateTrue . 'images/elements/card-bg.png') }} ');">
+                            <span class="caption text-white mb-3">@lang('Total Expense')</span>
+                            <h3 class="d-number text-white">{{ showAmount($widget['app_total_expense']) }}</h3>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="card-widget section--bg2 text-center bg_img" style="background-image: url(' {{ asset($activeTemplateTrue . 'images/elements/card-bg.png') }} ');">
+                            <span class="caption text-white mb-3">@lang('Total Withdraw')</span>
+                            <h3 class="d-number text-white">{{ showAmount($widget['app_total_withdraw']) }}</h3>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="card-widget section--bg2 text-center bg_img" style="background-image: url(' {{ asset($activeTemplateTrue . 'images/elements/card-bg.png') }} ');">
+                            <span class="caption text-white mb-3">@lang('Current Balance')</span>
+                            <h3 class="d-number text-white">{{ showAmount($widget['app_current_balance']) }}</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <h4 class="text-center">@lang('My Account Overview')</h4>
+            </div>
             <div class="col-lg-6">
                 <div class="card-widget section--bg2 text-center bg_img" style="background-image: url(' {{ asset($activeTemplateTrue . 'images/elements/card-bg.png') }} ');">
                     <span class="caption text-white mb-3">@lang('Account Number')</span>
@@ -141,76 +173,76 @@ $kyc = getContent('kyc_content.content', true);
 
         <div class="row gy-4 mt-3">
             <div class="col-lg-6">
-                <h4 class="mb-3">@lang('Latest Credits')</h3>
-                    <div class="custom--card">
-                        <div class="card-body p-0">
-                            <div class="table-responsive--md">
-                                <table class="table custom--table mb-0">
-                                    <thead>
+                <h4 class="mb-3">@lang('Latest Credits')</h4>
+                <div class="custom--card">
+                    <div class="card-body p-0">
+                        <div class="table-responsive--md">
+                            <table class="table custom--table mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>@lang('S.N.')</th>
+                                        <th>@lang('Date')</th>
+                                        <th>@lang('Trx')</th>
+                                        <th>@lang('Amount')</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @forelse($credits as $credit)
                                         <tr>
-                                            <th>@lang('S.N.')</th>
-                                            <th>@lang('Date')</th>
-                                            <th>@lang('Trx')</th>
-                                            <th>@lang('Amount')</th>
+                                            <td>{{ __($loop->iteration) }}</td>
+                                            <td>
+                                                {{ showDateTime($credit->created_at, 'd M, Y h:i A') }}
+                                            </td>
+                                            <td>{{ __($credit->trx) }}</td>
+                                            <td class="fw-bold">
+                                                {{ showAmount($credit->amount) }} {{ __($general->cur_text) }}
+                                            </td>
                                         </tr>
-                                    </thead>
-                                    <tbody>
-                                        @forelse($credits as $credit)
-                                            <tr>
-                                                <td>{{ __($loop->iteration) }}</td>
-                                                <td>
-                                                    {{ showDateTime($credit->created_at, 'd M, Y h:i A') }}
-                                                </td>
-                                                <td>{{ __($credit->trx) }}</td>
-                                                <td class="fw-bold">
-                                                    {{ showAmount($credit->amount) }} {{ __($general->cur_text) }}
-                                                </td>
-                                            </tr>
-                                        @empty
-                                            <tr>
-                                                <td colspan="100%" class="text-center">{{ __($emptyMessage) }}</td>
-                                            </tr>
-                                        @endforelse
-                                    </tbody>
-                                </table>
-                            </div>
+                                    @empty
+                                        <tr>
+                                            <td colspan="100%" class="text-center">{{ __($emptyMessage) }}</td>
+                                        </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
                         </div>
                     </div>
+                </div>
             </div>
             <div class="col-lg-6">
-                <h4 class="mb-3">@lang('Latest Debits')</h3>
-                    <div class="custom--card">
-                        <div class="card-body p-0">
-                            <div class="table-responsive--md">
-                                <table class="table custom--table mb-0">
-                                    <thead>
+                <h4 class="mb-3">@lang('Latest Debits')</h4>
+                <div class="custom--card">
+                    <div class="card-body p-0">
+                        <div class="table-responsive--md">
+                            <table class="table custom--table mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>@lang('S.N.')</th>
+                                        <th>@lang('Date')</th>
+                                        <th>@lang('Trx')</th>
+                                        <th>@lang('Amount')</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @forelse($debits as $debit)
                                         <tr>
-                                            <th>@lang('S.N.')</th>
-                                            <th>@lang('Date')</th>
-                                            <th>@lang('Trx')</th>
-                                            <th>@lang('Amount')</th>
+                                            <td>{{ __($loop->iteration) }}</td>
+                                            <td>{{ showDateTime($debit->created_at, 'd M, Y h:i A') }}</td>
+                                            <td>{{ __($debit->trx) }}</td>
+                                            <td class="fw-bold">
+                                                {{ showAmount($debit->amount) }}{{ __($general->cur_text) }}
+                                            </td>
                                         </tr>
-                                    </thead>
-                                    <tbody>
-                                        @forelse($debits as $debit)
-                                            <tr>
-                                                <td>{{ __($loop->iteration) }}</td>
-                                                <td>{{ showDateTime($debit->created_at, 'd M, Y h:i A') }}</td>
-                                                <td>{{ __($debit->trx) }}</td>
-                                                <td class="fw-bold">
-                                                    {{ showAmount($debit->amount) }}{{ __($general->cur_text) }}
-                                                </td>
-                                            </tr>
-                                        @empty
-                                            <tr>
-                                                <td colspan="100%" class="text-center">{{ __($emptyMessage) }}</td>
-                                            </tr>
-                                        @endforelse
-                                    </tbody>
-                                </table>
-                            </div>
+                                    @empty
+                                        <tr>
+                                            <td colspan="100%" class="text-center">{{ __($emptyMessage) }}</td>
+                                        </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
                         </div>
                     </div>
+                </div>
             </div>
         </div>
 

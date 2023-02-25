@@ -10,6 +10,7 @@ use App\Models\Fdr;
 use App\Lib\CurlRequest;
 use App\Models\Loan;
 use App\Models\UserLogin;
+use App\Models\Expense;
 use App\Models\Withdrawal;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
@@ -24,6 +25,11 @@ use App\Http\Controllers\SiteController;
 class AdminController extends Controller {
 
     private function widgetData() {
+        $widget['total_deposits']          = Deposit::successful()->sum('final_amo');
+        $widget['total_expenses']          = Expense::sum('amount');
+        $widget['total_withdrawals']       = Withdrawal::approved()->sum('after_charge');
+        $widget['total_balance']           = $widget['total_deposits'] - $widget['total_expenses'] - $widget['total_withdrawals'];
+
         $widget['total_users']             = User::count();
         $widget['verified_users']          = User::active()->count();
         $widget['email_unverified_users']  = User::emailUnverified()->count();
