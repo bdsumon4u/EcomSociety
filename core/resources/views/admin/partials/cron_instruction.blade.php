@@ -43,7 +43,7 @@
     </div>
 </div>
 
-@push('script')
+{{-- @push('script')
     @if (Carbon\Carbon::parse($general->last_loan_cron)->diffInSeconds() >= 5400 || Carbon\Carbon::parse($general->last_dps_cron)->diffInSeconds() >= 5400 || Carbon\Carbon::parse($general->last_fdr_cron)->diffInSeconds() >= 5400 || !$general->last_loan_cron || !$general->last_dps_cron || !$general->last_fdr_cron)
         <script>
             'use strict';
@@ -63,4 +63,4 @@
             });
         </script>
     @endif
-@endpush
+@endpush --}}
