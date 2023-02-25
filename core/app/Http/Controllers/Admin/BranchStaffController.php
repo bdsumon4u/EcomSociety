@@ -26,7 +26,7 @@ class BranchStaffController extends Controller {
         }
 
         if (request()->has('branch')) {
-            $branch     = Branch::where('name', request()->branch)->first();
+            $branch     = Branch::where('id', request()->branch)->first();
             $staffs     = $staffs->withWhereHas('assignBranch', function ($query) use ($branch) {
                 $query->where('branch_id', $branch->id);
             });
